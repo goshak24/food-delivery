@@ -3,6 +3,7 @@ import React from 'react'
 
 const RestaurantScreen = () => {
   return (
+    // Time of video to 11:18 
     <SafeAreaView>
       <Text>RestaurantScreen</Text>
     </SafeAreaView>

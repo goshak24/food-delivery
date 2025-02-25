@@ -16,7 +16,7 @@ const Categories = () => {
         horizontal 
         showsHorizontalScrollIndicator={false}
         style={{overflow: 'visible'}}
-        contentContainerStyle={{paddingHorizontal: 15}}
+        contentContainerStyle={{paddingHorizontal: 15, marginBottom: verticalScale(4)}}
       >
         {
             testCategories.map((category, index) => {

@@ -1,32 +1,40 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React from 'react';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import RestaurantCard from './RestaurantCard';
 
-import { featuredRestaurants } from '../constants'
-import RestaurantCard from './RestaurantCard'
-
-const FeaturedRow = () => {
+const FeaturedRow = ({ restaurants }) => {
   return (
     <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{marginHorizontal: 20}}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ marginHorizontal: 20, marginBottom: 10 }}
     >
-        {
-            featuredRestaurants.map((restaurant, index) => {
-                return (
-                    <View key={index} style={{justifyContent: 'center', alignItems: 'center', marginRight: verticalScale(9), marginTop: verticalScale(8)}}>
-                        <RestaurantCard title={restaurant.title} description={restaurant.description} 
-                        category={restaurant.category} rating={restaurant.rating} location={restaurant.location}
-                        image={restaurant.image} city={restaurant.city} /> 
-                    </View> 
-                )
-            })
-        }
+      {restaurants.map((restaurant, index) => (
+        <View
+          key={index}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginRight: verticalScale(9),
+            marginTop: verticalScale(4),
+          }}
+        >
+          <RestaurantCard
+            title={restaurant.title}
+            description={restaurant.description}
+            category={restaurant.category}
+            rating={restaurant.rating}
+            location={restaurant.location}
+            image={restaurant.image}
+            city={restaurant.city}
+          />
+        </View>
+      ))}
     </ScrollView>
-  )
-}
+  );
+};
 
-export default FeaturedRow
+export default FeaturedRow;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

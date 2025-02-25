@@ -3,7 +3,9 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import * as Icon from "react-native-feather";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+
 import Categories from '../components/Categories';
+import FeaturedRow from '../components/FeaturedRow';
 
 const HomeScreen = () => {
   return (
@@ -29,6 +31,8 @@ const HomeScreen = () => {
       {/* Main Content Area */}
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 20}}>
         <Categories  /> 
+
+        <FeaturedRow />
       </ScrollView>
 
     </SafeAreaView>

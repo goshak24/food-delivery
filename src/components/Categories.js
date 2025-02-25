@@ -23,8 +23,8 @@ const Categories = () => {
                 return (
                     <View key={index} style={{justifyContent: 'center', alignItems: 'center', marginRight: verticalScale(9), marginTop: verticalScale(6)}}>
                         <TouchableOpacity onPress={() => onCatSelect(index)} style={{width: verticalScale(50), padding: 4, borderRadius: 10, backgroundColor: selectedCat === index ? '#008080' : '#C4C4C4', alignItems: 'center'}}>
-                            <Text style={{color: selectedCat === index ? '#fff' : '#000'}}>{category.name}</Text>
-                            <Image source={category.image} style={{width: verticalScale(35), height: verticalScale(35), borderRadius: 10}} />
+                            <Text style={{marginBottom: 2, color: selectedCat === index ? '#fff' : '#000'}}>{category.name}</Text>
+                            <Image source={category.image} style={{width: verticalScale(35), height: verticalScale(35), borderRadius: 10, marginBottom: 2}} />
                         </TouchableOpacity>
                     </View>
                 )

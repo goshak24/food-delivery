@@ -23,6 +23,11 @@ export const testCategories = [
         id: 5, 
         name: 'Japan', 
         image: require('../../assets/dishes/ramen.jpeg') 
+    }, 
+    {
+        id: 6, 
+        name: 'Thai', 
+        image: require('../../assets/dishes/ramen.jpeg') 
     }
 ]
 

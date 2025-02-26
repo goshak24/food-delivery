@@ -8,6 +8,9 @@ const Categories = () => {
 
     const onCatSelect = (key) => {
         setSelectedCat(key)
+        if (key === selectedCat) {
+          setSelectedCat('') 
+        }
     }
 
     return (
@@ -16,15 +19,15 @@ const Categories = () => {
         horizontal 
         showsHorizontalScrollIndicator={false}
         style={{overflow: 'visible'}}
-        contentContainerStyle={{paddingHorizontal: 15, marginBottom: verticalScale(4)}}
+        contentContainerStyle={{paddingHorizontal: verticalScale(6), marginBottom: verticalScale(10)}}
       >
         {
             testCategories.map((category, index) => {
                 return (
-                    <View key={index} style={{justifyContent: 'center', alignItems: 'center', marginRight: verticalScale(9), marginTop: verticalScale(6)}}>
-                        <TouchableOpacity onPress={() => onCatSelect(index)} style={{width: verticalScale(50), padding: 4, borderRadius: 10, backgroundColor: selectedCat === index ? '#008080' : '#C4C4C4', alignItems: 'center'}}>
+                    <View key={index} style={{justifyContent: 'center', alignItems: 'center', marginRight: verticalScale(9), width: verticalScale(56), marginTop: verticalScale(6)}}>
+                        <TouchableOpacity onPress={() => onCatSelect(index)} style={{width: verticalScale(55), height: verticalScale(55), padding: 4, borderRadius: 10, backgroundColor: selectedCat === index ? '#008080' : '#C4C4C4', alignItems: 'center'}}>
                             <Text style={{marginBottom: 2, color: selectedCat === index ? '#fff' : '#000'}}>{category.name}</Text>
-                            <Image source={category.image} style={{width: verticalScale(35), height: verticalScale(35), borderRadius: 10, marginBottom: 2}} />
+                            <Image source={category.image} style={{width: verticalScale(56), height: verticalScale(35), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginBottom: 2}} />
                         </TouchableOpacity>
                     </View>
                 )

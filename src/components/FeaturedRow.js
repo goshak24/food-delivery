@@ -8,7 +8,7 @@ const FeaturedRow = ({ restaurants }) => {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ marginHorizontal: 20, marginBottom: 10 }}
+      contentContainerStyle={{ marginHorizontal: verticalScale(6), marginBottom: verticalScale(8) }}
     >
       {restaurants.map((restaurant, index) => (
         <View
@@ -16,7 +16,7 @@ const FeaturedRow = ({ restaurants }) => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            marginRight: verticalScale(9),
+            marginRight: verticalScale(10),
             marginTop: verticalScale(4),
           }}
         >

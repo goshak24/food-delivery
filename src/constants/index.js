@@ -40,7 +40,7 @@ export const featuredRestaurants = [
         location: "123 Beijing Street",
         city: 'London',
         category: "Chinese", 
-        image: require('../../assets/restaurants/fast-food.webp')
+        image: require('../../assets/restaurants/rawImage (1).jpg')
     },
     {
         id: 2,

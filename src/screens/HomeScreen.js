@@ -1,39 +1,25 @@
 import { Platform, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, StatusBar, TouchableOpacity } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Icon from 'react-native-feather';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
-
 import { LinearGradient } from 'expo-linear-gradient';
+import Constants from 'expo-constants';
 
-import { testCategories, featuredRestaurants } from '../constants';
-
-import Constants from 'expo-constants'; 
+import { featuredRestaurants } from '../constants'; 
 
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
 import FeaturedRowContainer from '../components/FeaturedRowContainer';
+import { setFiltered } from '../components/helperFuncs'; 
 
-const HomeScreen = () => { 
+const HomeScreen = () => {
+  const [searchQuery, setSearchQuery] = useState(''); 
+  const [filterQuery, setFilterQuery] = useState('');
+  const [filteredRestaurants, setFilteredRestaurants] = useState(featuredRestaurants);
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredRestaurants, setFilteredRestaurants] = useState(featuredRestaurants); 
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    if (query) {
-      const filtered = featuredRestaurants.filter(
-        (restaurant) =>
-          restaurant.title.toLowerCase().includes(query.toLowerCase()) ||
-          restaurant.description.toLowerCase().includes(query.toLowerCase()) ||
-          restaurant.category.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredRestaurants(filtered);
-    } else {
-      setFilteredRestaurants(featuredRestaurants);
-    }
-  };
-
-  StatusBar.setHidden(false) 
+  useEffect(() => {
+    setFilteredRestaurants(setFiltered(searchQuery || filterQuery)); 
+  }, [searchQuery, filterQuery]);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#F5E6C8' }}>
@@ -41,12 +27,13 @@ const HomeScreen = () => {
         colors={["#f5e6c8", "#f1dcb2", "#edd29d"]} 
         style={{ flex: 1 }}  
         start={{ x: 0, y: 0 }} 
-        end={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 0}}
       >
         <StatusBar barStyle="dark-content" backgroundColor='#EDD29D' translucent />
         <SafeAreaView style={styles.container}>
 
-            <ScrollView showsVerticalScrollIndicator={false} style={{marginTop: verticalScale(8)}}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: verticalScale(8) }}>
+            
             {/* Search Bar */}
             <View style={styles.searchBarStyles}>
               <View style={styles.sBarItself}>
@@ -55,7 +42,7 @@ const HomeScreen = () => {
                   placeholder="Search Restaurants"
                   style={styles.searchText}
                   value={searchQuery}
-                  onChangeText={handleSearch}
+                  onChangeText={setSearchQuery} 
                 />
 
                 <View
@@ -97,9 +84,9 @@ const HomeScreen = () => {
 
             {/* Main Content Area */}
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
-              <Categories />
+              <Categories onCategorySelect={(category) => setFilterQuery(category)} />
 
-              {searchQuery ? (
+              {searchQuery || filterQuery ? (
                 // Show search results
                 <>
                   <Text style={{ alignSelf: 'center', marginTop: 10 }}>Search Results</Text>
@@ -107,14 +94,18 @@ const HomeScreen = () => {
                 </>
               ) : (
                 // Show default content
-                <View style={{marginTop: verticalScale(8)}}>
+                <View style={{ marginTop: verticalScale(8) }}>
                   <FeaturedRowContainer title={"Best Rated"} />
-
                   <FeaturedRowContainer title={"Popular"} />
-
                   <FeaturedRowContainer title={"Closest"} />
                 </View>
               )}
+
+              {/* Show 'No Results' message if filteredRestaurants is empty */}
+              {filteredRestaurants.length === 0 ? (
+                <Text style={{ alignSelf: 'center', marginTop: 10 }}>No Results Available</Text>
+              ) : null} 
+
             </ScrollView>
           </ScrollView>
         </SafeAreaView>

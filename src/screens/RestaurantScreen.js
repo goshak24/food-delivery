@@ -12,9 +12,7 @@ const RestaurantScreen = ({ route }) => {
   const { title, description, rating, category, location, image, city } = route.params;
   const navigation = useNavigation(); 
 
-  useEffect(() => {
-    StatusBar.setHidden(true, 'fade'); // Hide the status bar completely
-  }, []);
+  // StatusBar.setHidden(true, 'fade'); 
 
   return (
     <View style={styles.container}>
@@ -26,7 +24,7 @@ const RestaurantScreen = ({ route }) => {
           <Feather name="arrow-left" size={moderateScale(24)} color="white" />
         </TouchableOpacity>
       
-      <SafeAreaView style={styles.detailsContainer}>
+      <View style={styles.detailsContainer}>
 
         {/* Header (Title & View Menu Button) */}
         <View style={styles.headerRow}>
@@ -60,9 +58,7 @@ const RestaurantScreen = ({ route }) => {
           <FeaturedRow restaurants={featuredRestaurants} /> 
         </View>
 
-        
-
-      </SafeAreaView>
+      </View>
     </View>
   );
 };
@@ -84,7 +80,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     marginTop: verticalScale(300), 
-    padding: verticalScale(15),
+    padding: verticalScale(10),
   },
   headerRow: {
     flexDirection: 'row',
@@ -137,17 +133,16 @@ const styles = StyleSheet.create({
     color: '#555',
     marginTop: verticalScale(10),
     lineHeight: moderateScale(20),
-    marginBottom: verticalScale(25),
+    marginBottom: verticalScale(20),
   },
   similarTitle: {
     fontSize: moderateScale(18),
     fontWeight: 'bold',
-    color: '#333',
-    marginBottom: verticalScale(5),
+    color: '#333'
   },
   featuredContainer: {
     marginHorizontal: verticalScale(-10),
-    padding: verticalScale(4),
+    padding: verticalScale(4) 
   },
   backButton: {
     position: 'absolute',

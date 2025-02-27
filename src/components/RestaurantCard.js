@@ -2,25 +2,24 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import * as Icon from "react-native-feather";
-
 import { useNavigation } from '@react-navigation/native';
 
 const RestaurantCard = ({ title, description, rating, category, location, image, city }) => {
-    const navigation = useNavigation(); 
+    const navigation = useNavigation();
 
     const handleSelect = () => {
-        navigation.navigate("Restaurant", { title, description, rating, category, location, image, city }); 
-    } 
+        navigation.navigate("Restaurant", { title, description, rating, category, location, image, city });
+    };
 
     return (
         <TouchableOpacity onPress={handleSelect} style={styles.cardContainer}>
             {/* Image */}
             <Image source={image} style={styles.image} />
 
-            <View style={{padding: moderateScale(12)}}>
-
+            {/* Content */}
+            <View style={styles.contentContainer}>
                 {/* Restaurant Title */}
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title} numberOfLines={1}>{title}</Text>
 
                 {/* Details Section */}
                 <View style={styles.detailsContainer}>
@@ -37,7 +36,7 @@ const RestaurantCard = ({ title, description, rating, category, location, image,
 
                     {/* City */}
                     <View style={styles.detailItem}>
-                        <Icon.MapPin width={moderateScale(13)} height={moderateScale(13)} stroke="white" />
+                        <Icon.MapPin width={moderateScale(14)} height={moderateScale(14)} stroke="white" />
                         <Text style={styles.detailText}>{city}</Text>
                     </View>
                 </View>
@@ -50,45 +49,52 @@ export default RestaurantCard;
 
 const styles = StyleSheet.create({
     cardContainer: {
-        alignItems: 'center', 
-        backgroundColor: '#E07A5F', 
+        backgroundColor: '#E07A5F',
         borderRadius: moderateScale(10),
         shadowColor: "#000",
-        overflow: 'hidden', 
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
-        elevation: 3, padding: moderateScale(4), 
-        height: verticalScale(150), 
-        width: scale(170), 
-    },
-    title: {
-        fontSize: moderateScale(14),
-        fontWeight: 'bold',
-        marginBottom: verticalScale(5),
-        textAlign: 'center',
-        color: 'white',
+        elevation: 3,
+        width: verticalScale(188),  
+        maxWidth: scale(240),  
+        alignSelf: 'center',
+        overflow: 'hidden',
+        marginVertical: verticalScale(8),
+        marginBottom: verticalScale(8) 
     },
     image: {
-        width: scale(170), 
-        height: verticalScale(90),
-        borderTopLeftRadius: moderateScale(8), 
-        borderTopRightRadius: moderateScale(8) 
+        width: '100%',
+        height: verticalScale(110), 
+        borderTopLeftRadius: moderateScale(10),
+        borderTopRightRadius: moderateScale(10),
+    },
+    contentContainer: {
+        paddingVertical: verticalScale(8),
+        paddingHorizontal: moderateScale(10),
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: moderateScale(16),
+        fontWeight: 'bold',
+        color: 'white',
+        textAlign: 'center',
     },
     detailsContainer: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center', 
-        width: '100%',
-        gap: scale(8), 
+        marginTop: verticalScale(4),
+        gap: scale(10),
     },
     detailItem: {
         flexDirection: 'row',
         alignItems: 'center',
+        gap: scale(4),
     },
     detailText: {
-        fontSize: moderateScale(13), 
+        fontSize: moderateScale(14),
         color: 'white',
-        marginLeft: verticalScale(3)
     },
 }); 
